@@ -1,5 +1,8 @@
 generate_commit_message.sh
 
+log_*.txt
+out/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
