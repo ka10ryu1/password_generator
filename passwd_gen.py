@@ -55,20 +55,20 @@ def mkdir(path: Path):
     return path
 
 
-def _select_password(length: int, get_pass_chars: str):
+def _select_str(length: int, get_pass_chars: str):
     password = ''.join(secrets.choice(get_pass_chars) for _ in range(length))
     # フォントによっては肉眼での判別が難しいものがあるので、1種類に統一する
     return password.replace('I', '1').replace('l', '1').replace('i', '1').replace('o', '0').replace('O', '0')
 
 
 @time_it('letter + digit')
-def get_random_password_v1(length: int):
-    return _select_password(length, ascii_letters + digits)
+def get_random_str_v1(length: int):
+    return _select_str(length, ascii_letters + digits)
 
 
 @time_it('letter + digit + symbol')
-def get_random_password_v2(length: int):
-    return _select_password(length, ascii_letters + digits + '@#$%&?!<>_-')
+def get_random_str_v2(length: int):
+    return _select_str(length, ascii_letters + digits + '@#$%&?!<>_-')
 
 
 @time_it(get_file_name(__file__))
@@ -85,7 +85,7 @@ def main(args: Namespace):
     """
     print(args)
 
-    grp = get_random_password_v1 if args.no_symbol else get_random_password_v2
+    grp = get_random_str_v1 if args.no_symbol else get_random_str_v2
     passwd = grp(args.n)
 
     print(f'{"_/" * (args.n // 2 + 4)}')

@@ -3,7 +3,7 @@
 from argparse import ArgumentParser, Namespace
 
 from measure_time import time_it, get_file_name
-from passwd_gen import get_random_password_v1 as get_random_str
+from passwd_gen import get_random_str_v1
 
 
 def command():
@@ -32,7 +32,7 @@ def main(args: Namespace):
     """
 
     print(args)
-    print('-'.join([get_random_str(n) for n in args.n]))
+    print('-'.join([get_random_str_v1(n) for n in args.n]))
     return 0
 
 
