@@ -16,23 +16,31 @@ def command():
         default=[8, 4, 4, 4, 12],
         help='生成するパスワードの文字数 [default:%(default)s]',
     )
+    parser.add_argument(
+        '--ext',
+        metavar='EXT',
+        default='png',
+        choices=['png', 'jpg', 'jpeg', 'gif', 'bmp', 'tiff', 'webp', ''],
+        help='付与する拡張子 [default:%(default)s]',
+    )
     return parser.parse_args()
 
 
 @time_it(get_file_name(__file__))
 def main(args: Namespace):
     """
-    ランダムなファイル名を生成する
+    メイン関数は、提供された引数に基づいてランダムな文字列を生成し、出力する
 
     Args:
         args (Namespace): 引数を含む名前空間オブジェクト
-            'n' という属性を持ち、各パスワードの長さを表す整数のリストであること
+
     Returns:
         int: 常に0を返す
     """
 
     print(args)
-    print('-'.join([get_random_str_v1(n) for n in args.n]))
+    ext = f'.{args.ext}' if args.ext else args.ext
+    print(f"{'-'.join([get_random_str_v1(n) for n in args.n])}{ext}")
     return 0
 
 
